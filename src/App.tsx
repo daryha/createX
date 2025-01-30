@@ -1,26 +1,60 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// src/App.tsx
 
-function App() {
+import React, { useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import { Header } from "./components/header";
+import { Intro } from "./components/intro";
+import { CategoryBanners } from "./components/categoryBanners";
+import { NewArrivals } from "./components/NewArrivals";
+import { StockBloks } from "./components/stockBloks";
+import { Subscribe } from "./components/Subscribe";
+import { Categories } from "./components/categories";
+import { Footer } from "./components/footer";
+import { ProductListPage } from "./components/productListPage";
+import { ProductDetail } from "./components/productDetail";
+import { Advantage } from "./components/advantage";
+import { Cart } from "./components/cart";
+
+import { useAppDispatch } from "./redux/hooks";
+import { loadUserFromStorage } from "./redux/slices/authSlice";
+
+const App: React.FC = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    // Загружаем данные пользователя из localStorage (если есть)
+    dispatch(loadUserFromStorage());
+  }, [dispatch]);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <Intro />
+              <CategoryBanners />
+              <NewArrivals />
+              <StockBloks />
+              <Categories />
+              <Advantage />
+              <Subscribe />
+            </>
+          }
+        />
+        <Route path="/products" element={<ProductListPage />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
+        <Route
+          path="/products/category/:categoryId"
+          element={<ProductListPage />}
+        />
+        <Route path="/cart" element={<Cart />} />
+      </Routes>
+      <Footer />
     </div>
   );
-}
+};
 
 export default App;

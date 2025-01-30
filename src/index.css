@@ -1,13 +1,60 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@layer components {
+  body {
+    overflow-x: hidden;
+  }
+
+  .link-item {
+    @apply relative;
+  }
+
+  .link-item::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #17696a;
+    transition: width 0.3s;
+  }
+
+  .link-item:hover::after {
+    width: 100%;
+  }
+
+  p {
+    @apply text-customBlack font-Roboto;
+  }
+
+  .custom-scroll {
+    height: 600px;
+    width: 100px;
+    overflow-y: auto;
+    position: relative;
+  }
+
+  .custom-scroll::-webkit-scrollbar {
+    width: 3px; /* Ширина полосы прокрутки */
+    height: 100%; /* Высота полосы прокрутки */
+  }
+
+  .custom-scroll::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 4px;
+  }
+
+  .custom-scroll::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  .custom-scroll {
+    scrollbar-gutter: stable both-edges;
+  }
+  .direction-rtl {
+    direction: rtl; /* Скролл появляется слева */
+  }
 }
