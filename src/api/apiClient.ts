@@ -3,7 +3,7 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "http://localhost:8080/api",
+  baseURL: "https://create-x-back-gnn2fl0xy-daryhas-projects.vercel.app/",
   withCredentials: true, // Для работы с cookies
 });
 
